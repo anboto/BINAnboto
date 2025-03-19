@@ -1,0 +1,13 @@
+uses
+	CtrlLib,
+	Controls4U,
+	STEM4U;
+
+file
+	main.cpp,
+	BINAnboto.h,
+	BINAnboto.lay;
+
+mainconfig
+	"" = "GUI";
+
