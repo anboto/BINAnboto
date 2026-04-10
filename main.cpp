@@ -23,7 +23,7 @@ void BINAnboto::LoadSerializeJson(bool &firstTime) {
 	firstTime = false;
 	String folder = GetBINAnbotoDataFolder();
 	if (!DirectoryCreateX(folder))
-		throw Exc(Format(t_("Impossible to create folder '%s' to store configuration file"), folder));
+		throw Exc(F(t_("Impossible to create folder '%s' to store configuration file"), folder));
 	else {
 		String fileName = AFX(folder, "config.cf");
 		if (!FileExists(fileName)) {
@@ -32,7 +32,7 @@ void BINAnboto::LoadSerializeJson(bool &firstTime) {
 		} else {
 			String jsonText = LoadFile(fileName);
 			if (jsonText.IsEmpty())
-				throw Exc(Format(t_("Configuration file '%s' is empty"), fileName));
+				throw Exc(F(t_("Configuration file '%s' is empty"), fileName));
 			else {
 				String ret = LoadFromJsonError(*this, jsonText);
 				if (!ret.IsEmpty())
@@ -45,10 +45,10 @@ void BINAnboto::LoadSerializeJson(bool &firstTime) {
 void BINAnboto::StoreSerializeJson() {
 	String folder = GetBINAnbotoDataFolder();
 	if (!DirectoryCreateX(folder))
-		throw Exc(Format(t_("Impossible to create folder '%s' to store configuration file"), folder));
+		throw Exc(F(t_("Impossible to create folder '%s' to store configuration file"), folder));
 	String fileName = AFX(folder, "config.cf");
 	if (!StoreAsJsonFile(*this, fileName, true))
-		throw Exc(Format(t_("Error saving configuration file '%s'"), fileName));
+		throw Exc(F(t_("Error saving configuration file '%s'"), fileName));
 }
 
 BINAnboto::BINAnboto() {
@@ -332,7 +332,7 @@ void ScanAOIs(Array<Vector<int>> &AOIs, FileInBinary &file, int64 size, int from
 	for (int i = 0; i < toTest.size(); ++i)
 		isAOI[i] = IsAOI(file, size, toTest[i], type, 10);	
 
-	PromptOK(Format(t_("Found %d AOI"), Sum(isAOI)));
+	PromptOK(F(t_("Found %d AOI"), Sum(isAOI)));
 	
 	//	
 }
@@ -508,7 +508,7 @@ GUI_APP_MAIN
 		errorStr = t_("Unknown error");
 	}
 	if (!errorStr.IsEmpty()) {
-		Exclamation(Format(t_("Problem found: %s"), errorStr));
+		Exclamation(F(t_("Problem found: %s"), errorStr));
 		SetExitCode(-1);
 	}
 }
